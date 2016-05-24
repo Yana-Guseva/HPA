@@ -1,11 +1,9 @@
 package org.eltech.ddm.associationrules.apriori.hpav2.steps;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.eltech.ddm.associationrules.AssociationRulesFunctionSettings;
-import org.eltech.ddm.associationrules.Item;
 import org.eltech.ddm.associationrules.ItemSet;
 import org.eltech.ddm.associationrules.ItemSets;
 import org.eltech.ddm.associationrules.apriori.hpa.HPAMiningModel;

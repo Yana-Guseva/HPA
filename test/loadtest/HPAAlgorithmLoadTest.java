@@ -20,7 +20,7 @@ public class HPAAlgorithmLoadTest extends HPALoadTest{
 		System.out.println("----- HPAAlgoritm -------");
 		
 //		for(int i=0; i < dataSets.length; i++){
-			setSettings(4);
+			setSettings(7);
 		
 			HPAAlgorithm algorithm = new HPAAlgorithm(miningSettings);
 			System.out.println("Start algorithm");

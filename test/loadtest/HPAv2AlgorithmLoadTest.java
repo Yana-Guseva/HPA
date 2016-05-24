@@ -20,7 +20,7 @@ public class HPAv2AlgorithmLoadTest extends HPALoadTest{
 		System.out.println("----- HPAv2Algoritm -------");
 		
 //		for(int i=0; i < dataSets.length; i++){
-			setSettings(3);
+			setSettings(8);
 		
 			HPAv2Algorithm algorithm = new HPAv2Algorithm(miningSettings);
 			System.out.println("Start algorithm");

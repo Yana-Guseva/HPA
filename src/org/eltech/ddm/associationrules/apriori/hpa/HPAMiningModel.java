@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ForkJoinPool;
 
 import org.eltech.ddm.associationrules.AssociationRulesFunctionSettings;
 import org.eltech.ddm.associationrules.ItemSet;
@@ -44,7 +45,7 @@ public class HPAMiningModel extends AprioriMiningModel {
 	
 	@Override
 	public void join(List<EMiningModel> joinModels) throws MiningException {
-
+//		System.out.println("----------------------------------------------------------------------------");
 		for (EMiningModel mm : joinModels) {
 			if (mm == this) {
 				continue;
@@ -58,6 +59,7 @@ public class HPAMiningModel extends AprioriMiningModel {
 			}
 			hpamm.kItemSetsTransactionSubset.remove(index - 1);
 			Map<Integer, Map<List<String>, Integer>> currentMap = hpamm.kItemSetsTransactionSubset.get(index);
+//			System.out.println("hpamm " + hpamm.idModel + " " + currentMap);
 			if (currentMap != null) {
 				if (!kItemSetsTransactionSubset.containsKey(index)) {
 					kItemSetsTransactionSubset.put(index, new HashMap<Integer, Map<List<String>, Integer>>());
@@ -73,11 +75,13 @@ public class HPAMiningModel extends AprioriMiningModel {
 						if (isContains) {
 							Integer count = commonMap.get(key) + map.get(key);
 							commonMap.put(key, count);
+//							System.out.println("put " +key + " " + count);
 						} else {
 							commonMap.put(key, map.get(key));
 						}
 					}
 				}
+//				System.out.println("after join " + getKItemSetsTransactionSubset());
 			}
 
 			List<ItemSets> curList = hpamm.getLargeItemSetsList();
@@ -97,6 +101,8 @@ public class HPAMiningModel extends AprioriMiningModel {
 		for (int i = 0; i < handlerCount; i++) {
 			((HPAMiningModel) models.get(i)).setIdModel(i);
 		}
+//		System.out.println("0 " + ((AprioriMiningModel) models.get(0)).getTransactionList());
+//		System.out.println("1 " + ((AprioriMiningModel) models.get(1)).getTransactionList());
 		return models;
 	}
 

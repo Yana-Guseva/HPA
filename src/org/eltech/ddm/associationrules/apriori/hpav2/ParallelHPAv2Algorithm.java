@@ -45,13 +45,21 @@ public class ParallelHPAv2Algorithm extends MiningAlgorithm {
 						new CreateLarge1ItemSetStep(miningSettings)),
 				new CreateKItemSetTransactionSubsetStep(miningSettings));
 		tcs.addListenerExecute(new StepExecuteTimingListner());
-
-		LargeItemSetListsCycleStep lislcs = new LargeItemSetListsCycleStep(miningSettings,
-				new ParallelByData(miningSettings,
-						new StepSequence(miningSettings, 
-								new HPAGetLargeCandidateStep(miningSettings),
-				new TransactionsCycleStep(miningSettings, new CreateKItemSetTransactionSubsetStep(miningSettings)))));
+		
+		StepSequence ss = new StepSequence(miningSettings, 
+				new HPAGetLargeCandidateStep(miningSettings),
+					new TransactionsCycleStep(miningSettings, new CreateKItemSetTransactionSubsetStep(miningSettings)));
+		ss.addListenerExecute(new StepExecuteTimingListner());
+		
+		ParallelByData pbd = new ParallelByData(miningSettings, ss);
+		pbd.addListenerExecute(new StepExecuteTimingListner());
+		
+		LargeItemSetListsCycleStep lislcs = new LargeItemSetListsCycleStep(miningSettings, pbd);
 		lislcs.addListenerExecute(new StepExecuteTimingListner());
+		
+//		LargeItemSetListsCycleStep lislcs = new LargeItemSetListsCycleStep(miningSettings,
+//				new ParallelByData(miningSettings, ss));
+//		lislcs.addListenerExecute(new StepExecuteTimingListner());
 
 		LargeItemSetListsCycleStep lislcs2 = new LargeItemSetListsCycleStep(miningSettings, new KLargeItemSetsCycleStep(
 				miningSettings,

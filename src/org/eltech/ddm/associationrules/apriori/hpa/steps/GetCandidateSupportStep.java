@@ -21,6 +21,7 @@ public class GetCandidateSupportStep extends Step {
 	protected EMiningModel execute(MiningInputStream inputData, EMiningModel model) throws MiningException {
 		HPAMiningModel modelA = (HPAMiningModel) model;
 		ItemSet itemSet = modelA.getLargeItemSetsList().get(modelA.getCurrentLargeItemSets()).get(modelA.getCurrentCandidate());
+		
 		if (modelA.getKItemSetsTransactionSubset().size() > 0) {
 			Map<Integer, Map<List<String>, Integer>> currMap = modelA.getKItemSetsTransactionSubset().get(modelA.getCurrentLargeItemSets() + 1);
 			if (currMap != null) {
